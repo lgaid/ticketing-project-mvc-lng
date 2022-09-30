@@ -5,12 +5,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public abstract class AbstractMapService<T,ID> {
+public abstract class AbstractMapService <T,ID>{
 
-    public Map<ID,T> map = new HashMap<>(); // temporary Database
+    public Map<ID,T> map = new HashMap<>(); //DB
 
-    T save(ID id, T object){
-        map.put(id, object);
+    T save(ID id,T object){
+        map.put(id,object);
         return object;
     }
 
@@ -19,6 +19,7 @@ public abstract class AbstractMapService<T,ID> {
     }
 
     T findById(ID id){
+
         return map.get(id);
     }
 
@@ -26,10 +27,4 @@ public abstract class AbstractMapService<T,ID> {
         map.remove(id);
     }
 
-
-
 }
-
-
-
-
