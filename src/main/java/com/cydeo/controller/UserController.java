@@ -6,10 +6,12 @@ import com.cydeo.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/user")
+@RequestMapping("/user") // user/create
 public class UserController {
 
     private final RoleService roleService;
@@ -20,7 +22,7 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping("/create")
+    @GetMapping("/create") // user/create
     public String createUser(Model model){
 
         model.addAttribute("user",new UserDTO());
@@ -30,6 +32,13 @@ public class UserController {
         model.addAttribute("users",userService.findAll());
 
         return "/user/create";
+    }
+    @PostMapping("/create")
+    public String insertUser(@ModelAttribute("user") UserDTO user, Model model){
+
+        userService.save(user);
+
+        return "user/create";
     }
 
 }
