@@ -35,7 +35,7 @@ public class UserController {
 
         userService.save(user);
 
-        return "user/create";
+        return "redirect:/user/create";
     }
 
     @GetMapping("/update/{username}")
