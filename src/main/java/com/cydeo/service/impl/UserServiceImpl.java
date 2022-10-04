@@ -29,15 +29,22 @@ public class UserServiceImpl extends AbstractMapService<UserDTO,String> implemen
         super.deleteById(username);
     }
 
-    public void update(UserDTO object){
+    @Override
+    public void update(UserDTO object) {
         super.update(object.getUserName(),object);
     }
 
-    public List<UserDTO> findManager(){
-        return findAll().stream()
-                .filter(user -> user.getRole().getId() == 2)
-                .collect(Collectors.toList());
+    @Override
+    public List<UserDTO> findManagers() {
+        return findAll().stream().filter(user -> user.getRole().getId() == 2).collect(Collectors.toList());
     }
+
+    @Override
+    public List<UserDTO> findEmployees() {
+        return findAll().stream().filter(user -> user.getRole().getId() == 3).collect(Collectors.toList());
+    }
+
+
 
 
 }
