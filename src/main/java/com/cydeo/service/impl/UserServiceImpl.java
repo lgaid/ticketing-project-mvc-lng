@@ -5,6 +5,7 @@ import com.cydeo.service.UserService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class UserServiceImpl extends AbstractMapService<UserDTO,String> implements UserService {
@@ -27,4 +28,16 @@ public class UserServiceImpl extends AbstractMapService<UserDTO,String> implemen
     public void deleteById(String username) {
         super.deleteById(username);
     }
+
+    public void update(UserDTO object){
+        super.update(object.getUserName(),object);
+    }
+
+    public List<UserDTO> findManager(){
+        return findAll().stream()
+                .filter(user -> user.getRole().getId() == 2)
+                .collect(Collectors.toList());
+    }
+
+
 }
